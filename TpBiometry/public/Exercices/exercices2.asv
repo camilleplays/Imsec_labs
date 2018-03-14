@@ -15,15 +15,10 @@ figureHandle7 = approximateImage('..\Images\test_A\s1_6.jpg',Means,SpaceA,10);
 %%%%%%%%%%%%%%%%%%%%
 %      Part B      %
 %%%%%%%%%%%%%%%%%%%%
-figure()
+
 model_first = model_projection(1:5:end,:);
-test_rate=zeros(1,100);
 
 for i=1:100
-    test_rate(i) = identify(model_first,test_projection,i,1);
+    test_rate = identify(model_first,test_projection,i,1);
 end
-
-plot(test_rate)
-xlabel('number of eigenfaces')
-ylabel('identification rate')
 

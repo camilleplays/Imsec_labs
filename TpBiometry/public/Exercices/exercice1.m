@@ -32,11 +32,9 @@ figureHandle4 = approximateImage('..\Images\train_A\s1_1.jpg',Means,SpaceA,100);
 % Part D %
 %%%%%%%%%%
 
-Locations = projectImages(train_A, Means, SpaceA);
+model_projection = projectImages(train_A, Means, SpaceA);
 FigureHandle5 = plotFirst3Coordinates(Locations, 5, 5);
 
-% COMMENTS :
-% The plot shows us the projection of 5 faces 
 
 
 
