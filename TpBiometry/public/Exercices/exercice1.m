@@ -6,11 +6,12 @@
 %      Part A      %
 %%%%%%%%%%%%%%%%%%%%
 
+
 addpath \\datas\teaching\courses\image\Tpbiometry\public\Matlab
 train_A = loadImagesInDirectory('\\datas\teaching\courses\image\Tpbiometry\public\Images\train_A\');
 [Means, SpaceA, Eigenvalues] = buildSpace(train_A);
 
-% what is the mawimum size of the eigenspace ie how many directions of
+% what is the maximum size of the eigenspace ie how many directions of
 % variability can we estimate?
 
 %there are as many directions as there are eigenvalues: 100
