@@ -33,7 +33,7 @@ plot(Cumulated);
 We then have the following curve:
 <!-- ADD IMAGE -->
 
-![Cumulated eigenvalues](../image_rapport/ex1_pB.jpg)
+![Cumulated eigenvalues](image_rapport/ex1_pB.jpg)
 
 **Please comment the curve**: As it is cumulative, the curve is growing. However, as we add eigenvalues, they contain less and less information. This is why the curve is similar to a logarithmic function.
 
