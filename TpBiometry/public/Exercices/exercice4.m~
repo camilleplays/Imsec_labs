@@ -16,7 +16,7 @@ test_B = loadImagesInDirectory('../Images/test_B/');
 
 projection_trainB_A = projectImages(train_B, Means, SpaceA);
 projection_testB_A = projectImages(test_B, Means, SpaceA);
-FigureHandle8 = plotFirst3Coordinates(projection_trainB_A, 5, 5);
+FigureHandle8 = plotFirst3Coordinates(projectiontrainB_A, 5, 5);
 
 trainB_A_rate=zeros(1,100);
 
@@ -61,20 +61,25 @@ end
 
 figure('Name','Identification rates for set Bin space B','NumberTitle','off')
 
+%plot(trainB_B_rate)
+xlabel('number of eigenfaces')
+ylabel('identification rate B on SpaceB')
+
 [rateB_B_max, rateB_B_index] = max(trainB_B_rate);
 x=[rateB_B_index,rateB_B_index];
 y=[0,rateB_B_max];
 
 plot(trainB_B_rate)
 xlabel('Number of eigenfaces')
-ylabel('Identification rate B on SpaceB')
+ylabel('Identification rate B on SpaceA')
 
 hold on %Adding the maximum value
 plot(x,y);
 hold off
 
 disp('Best identification rate :')
-disp(rateB_B_max)
+disp(rateB_A_max)
 disp('when using this number of eigenfaces :')
-disp(rateB_B_index)
+disp(rateB_A_index)
+
 

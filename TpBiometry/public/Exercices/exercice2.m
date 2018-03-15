@@ -2,7 +2,7 @@
     %    TP 1 - Face recognition with eigenfaces - ImSec     %
     %                        06/03/18                        %
     %                                                        %
-    % Camille PLAYS & William CLOT                Exercice 1 %
+    % Camille PLAYS & William CLOT                Exercice 2 %
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % REMINDER : PLEASE EXECUTE exercice1.m BEFORE EXECUTING THIS FILE
@@ -24,6 +24,7 @@ figureHandle7 = approximateImage('../Images/test_A/s1_6.jpg',Means,SpaceA,10);
 %% Part C : Computing identification rates (first face)
 
 figure('Name','Identification rate with first face','NumberTitle','off')
+
 model_first = model_projection(1:5:end,:); %Tacking only the first face of the models
 firstface_rate=zeros(1,100);
 
