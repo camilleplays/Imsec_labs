@@ -2,9 +2,19 @@
 
 Introduction 
 
+* [**Exercice 1 : Building the Eigenspace**](#exercice-1--building-the-eigenspace)
+* [**Exercice 2 : Identification**](#exercice-2--identification)
+* [**Exercice 3 : Verification**](#exercice-3--verification)
+* [**Exercice 4 : Mismatch between the eigenspace and test individuals**](#exercice-4--mismatch-between-the-eigenspace-and-test-individuals)
+
 ## Exercice 1 : Building the Eigenspace
 
-[`Exercices/exercice1.m`](Exercices/exercice1.m).
+All the code explained can be found in file [`exercice1.m`](public/Exercices/exercice1.m).
+
+* [A. Computing the Eigenspace A](#a-computing-the-eigenspace-a)
+* [B. Plotting the cumulative sum of eigenvalues](#b-plotting-the-cumulative-sum-of-eigenvalues)
+* [C. Approximating the first image](#c-approximating-the-first-image)
+* [D. Projecting and plotting in the face space](d-projecting-and-plotting-in-the-face-space)
 
 
 ### A. Computing the Eigenspace A
@@ -24,7 +34,7 @@ We now have access to the eigenspace (`SpaceA`) and the `Eigenvalues` of the ima
 
 The eigenvalues can be interpreted as the amount of information that is carried out by each eigenvector. **Why is it so ?** Because an eigenvalue represents the factor by which a eigenvector is stretched by the transformation of coordinates. 
 
-### B. Plotting tge cumulative sum of eigenvalues
+### B. Plotting the cumulative sum of eigenvalues
 
 We can plot the cumulative sum of eigenvalues with the following matlab instructions: 
 
@@ -49,8 +59,7 @@ figureHandle3 = approximateImage('\\datas\teaching\courses\image\Tpbiometry\publ
 figureHandle4 = approximateImage('\\datas\teaching\courses\image\Tpbiometry\public\Images\train_A\s1_1.jpg',Means,SpaceA,100);
 ```
 
-![using 40 eigenfaces](image_rapport/ex1_pC40.jpg)
-![using 100 eigenfaces](image_rapport/ex1_pC100.jpg)
+![using 40 and 100 eigenfaces](image_rapport/ex1_pC.jpg)
 
 **Can we rebuild the first image perfectly ?** Yes we can, if we use all the eigenvalues (100), we have all the information needed to rebuild the image. We can do so because the image in question was used to build the eigenspace in the first place.
 
@@ -64,7 +73,13 @@ Using routines `projectImages()` and `plotFirst3Coordinates()`, we manage to plo
 
 ## Exercice 2 : Identification
 
-All the code explained can be found in file [`Exercices/exercice2.m`](Exercices/exercice2.m).
+All the code explained can be found in file [`exercice2.m`](public/Exercices/exercice2.m).
+
+* [A. Projecting and plotting test_A](#a-projecting-and-plotting-test_a)
+* [B. Approximating s1_6.jpg](b-approximating-s1_6jpg)
+* [C. Computing the identification rates (first face)](c-computing-the-identification-rates-first-face)
+* [D. More identification rates (mean faces)](d-more-identification-rates-mean-faces)
+* [D. More identification rates (mean faces)](d-more-identification-rates-mean-faces)
 
 ### A. Projecting and plotting test_A
 
