@@ -127,5 +127,29 @@ plot(mean_rate)
 
 With this graph we found that the best identification rate is found with 23 eigenfaces and its value is 94%. The identification rate increases with the number of eigenfaces used and once il reaches 23 eigenfaces, it stays stable.
 
+We get a better result with a fewer number of eigenfaces using the average rather than the first image of each person.
+
 
 ![identification rate](image_rapport/ex2_pD.jpg)
+
+
+### E. Drawing indentification rates as a function of N-Best
+
+We projected the images of TestA into SpaceA and we computed the N-Best identification rates, for various N, using the routine identify. We therefore wrote the following code:
+
+```matlab
+Nbest_rate=zeros(1,5);
+
+for i=1:20
+    Nbest_rate(i) = identify(model_average,test_projection,5,i);
+end
+
+[Nbest_max, Nbest_index] = max(Nbest_rate);
+x=[Nbest_index,Nbest_index];
+y=[Nbest_rate(1),Nbest_max];
+
+plot(Nbest_rate);
+```
+We obtain the following graph which is the identification rate as a function of N:
+
+![identification rate](image_rapport/ex2_pE.jpg)
