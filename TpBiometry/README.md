@@ -76,10 +76,10 @@ Using routines `projectImages()` and `plotFirst3Coordinates()`, we manage to plo
 All the code explained can be found in file [`exercice2.m`](public/Exercices/exercice2.m).
 
 * [A. Projecting and plotting test_A](#a-projecting-and-plotting-test_a)
-* [B. Approximating s1_6.jpg](b-approximating-s1_6jpg)
-* [C. Computing the identification rates (first face)](c-computing-the-identification-rates-first-face)
-* [D. More identification rates (mean faces)](d-more-identification-rates-mean-faces)
-* [D. More identification rates (mean faces)](d-more-identification-rates-mean-faces)
+* [B. Approximating s1_6.jpg](#b-approximating-s1_6jpg)
+* [C. Computing the identification rates (first face)](#c-computing-the-identification-rates-first-face)
+* [D. More identification rates (mean faces)](#d-more-identification-rates-mean-faces)
+* [D. More identification rates (mean faces)](#d-more-identification-rates-mean-faces)
 
 ### A. Projecting and plotting test_A
 
