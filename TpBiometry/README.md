@@ -250,11 +250,11 @@ All the code explained can be found in file [`exercice4.m`](public/Exercices/exe
 
 ### A. Computing identification rates for set B
 
-we enrolled the images of TrainB into SpaceA and projected the image of TestB into SpaceA. We obtain the following identification rate for a variying number of eigenfaces:
+We enrolled the images of TrainB into SpaceA and projected the image of TestB into SpaceA. We obtain the following identification rate for a variying number of eigenfaces:
 
 ![EER curve](image_rapport/ex4_pB.jpg)
 
-the best identification rate is 21% and the optimal number of eigenfaces to obtain it is 7.
+The best identification rate is 21% and the optimal number of eigenfaces to obtain it is 7.
 
 
 ### B. Computing the eigenspace B
@@ -264,6 +264,6 @@ we now enroll the images of TrainB into SpaceB and project the images of TestB i
 
 ![EER curve](image_rapport/ex4_pB_bis.jpg)
 
-the best identification rate is 20% and the optimal number of eigenfaces to obtain it is 12.
+The best identification rate is 20% and the optimal number of eigenfaces to obtain it is 12.
 
-by comparing the two identification rate curves, we can observe that when we enroll images in a bigger space, we need less eigenfaces in order to get the best identification rate.
+By comparing the two identification rate curves, we can observe that when we enroll images in a bigger space, we need less eigenfaces in order to get the best identification rate.
