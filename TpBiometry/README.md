@@ -2,9 +2,33 @@
 
 Introduction 
 
+* [**Exercice 1 : Building the Eigenspace**](#exercice-1--building-the-eigenspace)
+	* [A. Computing the Eigenspace A](#a-computing-the-eigenspace-a)
+	* [B. Plotting the cumulative sum of eigenvalues](#b-plotting-the-cumulative-sum-of-eigenvalues)
+	* [C. Approximating the first image](#c-approximating-the-first-image)
+	* [D. Projecting and plotting in the face space](d-projecting-and-plotting-in-the-face-space)
+* [**Exercice 2 : Identification**](#exercice-2--identification)
+	* [A. Projecting and plotting test_A](#a-projecting-and-plotting-test_a)
+	* [B. Approximating s1_6.jpg](#b-approximating-s1_6jpg)
+	* [C. Computing the identification rates (first face)](#c-computing-the-identification-rates-first-face)
+	* [D. More identification rates (mean faces)](#d-more-identification-rates-mean-faces)
+	* [E. Drawing indentification rates as a function of N](#e-drawing-indentification-rates-as-a-function-of-n)
+* [**Exercice 3 : Verification**](#exercice-3--verification)
+	* [A. Computing client and impostor scores](#a-computing-client-and-impostor-scores)
+	* [B. Plotting the Receiver Operating Characteristic (ROC) curve](#b-plotting-the-receiver-operating-characteristic-ROC-curve)
+	* [C. Drawing the Equal Error Rate (EER) curve](#c-drawing-the-equal-error-rate-EER-curve)
+* [**Exercice 4 : Mismatch between the eigenspace and test individuals**](#exercice-4--mismatch-between-the-eigenspace-and-test-individuals)
+	* [A. Computing identification rates for set B](#a-computing-identification-rates-for-set-b)
+	* [B. Computing the eigenspace B](#b-computing-the-eigenspace-b)
+
 ## Exercice 1 : Building the Eigenspace
 
-[`Exercices/exercice1.m`](Exercices/exercice1.m).
+All the code explained can be found in file [`exercice1.m`](public/Exercices/exercice1.m).
+
+* [A. Computing the Eigenspace A](#a-computing-the-eigenspace-a)
+* [B. Plotting the cumulative sum of eigenvalues](#b-plotting-the-cumulative-sum-of-eigenvalues)
+* [C. Approximating the first image](#c-approximating-the-first-image)
+* [D. Projecting and plotting in the face space](d-projecting-and-plotting-in-the-face-space)
 
 
 ### A. Computing the Eigenspace A
@@ -24,7 +48,7 @@ We now have access to the eigenspace (`SpaceA`) and the `Eigenvalues` of the ima
 
 The eigenvalues can be interpreted as the amount of information that is carried out by each eigenvector. **Why is it so ?** Because an eigenvalue represents the factor by which a eigenvector is stretched by the transformation of coordinates. 
 
-### B. Plotting tge cumulative sum of eigenvalues
+### B. Plotting the cumulative sum of eigenvalues
 
 We can plot the cumulative sum of eigenvalues with the following matlab instructions: 
 
@@ -49,8 +73,7 @@ figureHandle3 = approximateImage('\\datas\teaching\courses\image\Tpbiometry\publ
 figureHandle4 = approximateImage('\\datas\teaching\courses\image\Tpbiometry\public\Images\train_A\s1_1.jpg',Means,SpaceA,100);
 ```
 
-![using 40 eigenfaces](image_rapport/ex1_pC40.jpg)
-![using 100 eigenfaces](image_rapport/ex1_pC100.jpg)
+![using 40 and 100 eigenfaces](image_rapport/ex1_pC.jpg)
 
 **Can we rebuild the first image perfectly ?** Yes we can, if we use all the eigenvalues (100), we have all the information needed to rebuild the image. We can do so because the image in question was used to build the eigenspace in the first place.
 
@@ -64,7 +87,13 @@ Using routines `projectImages()` and `plotFirst3Coordinates()`, we manage to plo
 
 ## Exercice 2 : Identification
 
-All the code explained can be found in file [`Exercices/exercice2.m`](Exercices/exercice2.m).
+All the code explained can be found in file [`exercice2.m`](public/Exercices/exercice2.m).
+
+* [A. Projecting and plotting test_A](#a-projecting-and-plotting-test_a)
+* [B. Approximating s1_6.jpg](#b-approximating-s1_6jpg)
+* [C. Computing the identification rates (first face)](#c-computing-the-identification-rates-first-face)
+* [D. More identification rates (mean faces)](#d-more-identification-rates-mean-faces)
+* [E. Drawing indentification rates as a function of N](#e-drawing-indentification-rates-as-a-function-of-n)
 
 ### A. Projecting and plotting test_A
 
@@ -105,3 +134,120 @@ With this graph we found that the best identification rate is found with 35 eige
 
 ### D. More identification rates (mean faces)
 
+This time, we used the average of the five training points of each individuals. In order to do that, we wrote the following code: 
+
+
+```matlab
+model_average = zeros(1,20);
+mean_rate=zeros(1,100);
+
+for i = 0:19
+    for j = 1:100
+        model_average(i+1,j) = (model_projection(5*i+1,j)+model_projection(5*i+2,j)+model_projection(5*i+3,j)+model_projection(5*i+4,j)+model_projection(5*i+5,j))/5;
+    end
+end
+
+for i=1:100
+    mean_rate(i) = identify(model_average,test_projection,i,1);
+end
+
+plot(mean_rate)
+```
+
+With this graph we found that the best identification rate is found with 23 eigenfaces and its value is 94%. The identification rate increases with the number of eigenfaces used and once il reaches 23 eigenfaces, it stays stable.
+
+We get a better result with a fewer number of eigenfaces using the average rather than the first image of each person.
+
+
+![identification rate](image_rapport/ex2_pD.jpg)
+
+
+### E. Drawing indentification rates as a function of N
+
+We projected the images of TestA into SpaceA and we computed the N-Best identification rates, for various N, using the routine identify. We therefore wrote the following code:
+
+```matlab
+Nbest_rate=zeros(1,5);
+
+for i=1:20
+    Nbest_rate(i) = identify(model_average,test_projection,5,i);
+end
+
+[Nbest_max, Nbest_index] = max(Nbest_rate);
+x=[Nbest_index,Nbest_index];
+y=[Nbest_rate(1),Nbest_max];
+
+plot(Nbest_rate);
+```
+
+We obtain the following graph which is the identification rate as a function of N:
+
+![identification rate](image_rapport/ex2_pE.jpg)
+
+The curve is an increasing function and reaches a maximum value for N=10 and stays stable from there. As the function `identify()` evaluates the pourcentage of identification it seems like for a value of N=10 the process of identification is optimal.
+
+## Exercice 3 : Verification
+
+All the code explained can be found in file [`exercice3.m`](public/Exercices/exercice3.m).
+
+* [A. Computing client and impostor scores](#a-computing-client-and-impostor-scores)
+* [B. Plotting the Receiver Operating Characteristic (ROC) curve](#b-plotting-the-receiver-operating-characteristic-ROC-curve)
+* [C. Drawing the Equal Error Rate (EER) curve](#c-drawing-the-equal-error-rate-EER-curve)
+
+### A. Computing client and impostor scores
+
+We use the `verify()` function with the following arguments:
+
+```matlab
+[DistancesClients, DistancesImpostors] = verify(model_projection,test_projection,5);
+```
+
+After plotting the histogram with rescaled values in order to be more readable we obtain the following graph:
+
+![identification rate](image_rapport/ex3_pA.jpg)
+
+we observe that the imposters scores are centered around a less important value than the clients. Therefore, they have a worse average score, even though some imposters can have a better score than some clients.
+
+### B. Plotting the Receiver Operating Characteristic (ROC) curve
+
+We use the `computeVerificationRates()` function with the following arguments:
+
+```matlab
+[FalseRejectionRates, FalseAcceptanceRates] = computeVerificationRates(DistancesClients,DistancesImpostors);
+```
+
+We obtain the ROC curve as so:
+
+![ROC curve](image_rapport/ex3_pB.jpg)
+
+This ROC curve is used when we have various threshold settings. If the acceptance threshold is low then we would allow a lot of people to gain access to the system and therefore the probability of rejecting someone that should be accepted (False Rejection) would be very low. On the contrary if the acceptance threshold is relativaly high, we would restrict as many people as we can and therefore the probability of accepting someone that should be rejected (False Acceptance) would be very low.
+
+### C. Drawing the Equal Error Rate (EER) curve
+
+We use the a simple loop to calculate the `EqualErrorRate` like so:
+
+```matlab
+EqualErrorRate = zeros(1,100)
+
+for i = 1:100
+    [DistancesClients, DistancesImpostors] = verify(model_projection,test_projection,i);
+    EqualErrorRate(i)=computeEER(DistancesClients, DistancesImpostors);
+end
+```
+
+We obtain the EER curve as so:
+
+![EER curve](image_rapport/ex3_pC.jpg)
+
+The Equal Error Rate is the rate at which both acceptance and rejection errors are equal. The more we use eigenfaces the less the ERR is high
+
+## Exercice 4 : Mismatch
+
+All the code explained can be found in file [`exercice4.m`](public/Exercices/exercice4.m).
+
+* [A. Computing identification rates for set B](#a-computing-identification-rates-for-set-b)
+* [B. Computing the eigenspace B](#b-computing-the-eigenspace-b)
+
+### A. Computing identification rates for set B
+
+### B. Computing the eigenspace B
