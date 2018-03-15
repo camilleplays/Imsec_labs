@@ -58,8 +58,7 @@ for i=1:100
     mean_rate(i) = identify(model_average,test_projection,i,1);
 end
 
-hold off
-figure();
+figure('Name','Identification rate with mean faces','NumberTitle','off')
 
 xlabel('number of eigenfaces')
 ylabel('identification rate (mean faces)')
