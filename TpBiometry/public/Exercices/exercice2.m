@@ -31,19 +31,22 @@ for i=1:100 %Computing the identification rates
     firstface_rate(i) = identify(model_first,test_projection,i,1);
 end
 
+[firstface_max, firstface_index] = max(firstface_rate);
+x=[firstface_index,firstface_index];
+y=[0,firstface_max];
+
 plot(firstface_rate)
 xlabel('Number of eigenfaces')
 ylabel('Identification rate')
 
 hold on %Adding the maximum value
-[firstface_max, firstface_index] = max(firstface_rate);
-x=[firstface_index,firstface_index];
-y=[0,firstface_max];
 plot(x,y);
 hold off
 
 
 %% Part D : More identification with mean faces
+
+figure('Name','Identification rate with mean faces','NumberTitle','off')
 
 model_average = zeros(1,20);
 mean_rate=zeros(1,100);
@@ -58,22 +61,20 @@ for i=1:100
     mean_rate(i) = identify(model_average,test_projection,i,1);
 end
 
-hold off
-figure();
-
-xlabel('number of eigenfaces')
-ylabel('identification rate (mean faces)')
-
-[firstface_max, firstface_index] = max(mean_rate);
-x=[firstface_index,firstface_index];
-y=[0,firstface_max];
+[meanface_max, meanface_index] = max(mean_rate);
+x=[meanface_index,meanface_index];
+y=[0,meanface_max];
 
 plot(mean_rate);
+xlabel('number of eigenfaces')
+ylabel('identification rate (mean faces)')
 hold on
 plot(x,y);
-
+hold off
 
 %% Part E : Drawing indentification rates as a function of N-Best
+
+figure('Name','Identification as function of N','NumberTitle','off')
 
 Nbest_rate=zeros(1,5);
 
@@ -81,12 +82,17 @@ for i=1:20
     Nbest_rate(i) = identify(model_average,test_projection,5,i);
 end
 
-hold off
-figure()
-
-xlabel('Nbest')
-ylabel('best identification rate')
-
+[Nbest_max, Nbest_index] = max(Nbest_rate);
+x=[Nbest_index,Nbest_index];
+y=[Nbest_rate(1),Nbest_max];
 
 plot(Nbest_rate);
+xlabel('N')
+ylabel('best identification rate')
+
+hold on
+plot(x,y);
+hold off
+
+
 

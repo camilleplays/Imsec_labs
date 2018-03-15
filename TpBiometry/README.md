@@ -104,3 +104,27 @@ With this graph we found that the best identification rate is found with 35 eige
 
 ### D. More identification rates (mean faces)
 
+This time, we used the average of the five training points of each individuals. In order to do that, we wrote the following code: 
+
+
+```matlab
+model_average = zeros(1,20);
+mean_rate=zeros(1,100);
+
+for i = 0:19
+    for j = 1:100
+        model_average(i+1,j) = (model_projection(5*i+1,j)+model_projection(5*i+2,j)+model_projection(5*i+3,j)+model_projection(5*i+4,j)+model_projection(5*i+5,j))/5;
+    end
+end
+
+for i=1:100
+    mean_rate(i) = identify(model_average,test_projection,i,1);
+end
+
+plot(mean_rate)
+```
+
+With this graph we found that the best identification rate is found with 23 eigenfaces and its value is 94%. The identification rate increases with the number of eigenfaces used and once il reaches 23 eigenfaces, it stays stable.
+
+
+![identification rate](image_rapport/ex2_pD.jpg)
