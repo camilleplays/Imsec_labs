@@ -3,9 +3,23 @@
 Introduction 
 
 * [**Exercice 1 : Building the Eigenspace**](#exercice-1--building-the-eigenspace)
+	* [A. Computing the Eigenspace A](#a-computing-the-eigenspace-a)
+	* [B. Plotting the cumulative sum of eigenvalues](#b-plotting-the-cumulative-sum-of-eigenvalues)
+	* [C. Approximating the first image](#c-approximating-the-first-image)
+	* [D. Projecting and plotting in the face space](d-projecting-and-plotting-in-the-face-space)
 * [**Exercice 2 : Identification**](#exercice-2--identification)
+	* [A. Projecting and plotting test_A](#a-projecting-and-plotting-test_a)
+	* [B. Approximating s1_6.jpg](#b-approximating-s1_6jpg)
+	* [C. Computing the identification rates (first face)](#c-computing-the-identification-rates-first-face)
+	* [D. More identification rates (mean faces)](#d-more-identification-rates-mean-faces)
+	* [E. Drawing indentification rates as a function of N](#e-drawing-indentification-rates-as-a-function-of-n)
 * [**Exercice 3 : Verification**](#exercice-3--verification)
+	* [A. Computing client and impostor scores](#a-computing-client-and-impostor-scores)
+	* [B. Plotting the Receiver Operating Characteristic (ROC) curve](#b-plotting-the-receiver-operating-characteristic-ROC-curve)
+	* [C. Drawing the Equal Error Rate (EER) curve](#c-drawing-the-equal-error-rate-EER-curve)
 * [**Exercice 4 : Mismatch between the eigenspace and test individuals**](#exercice-4--mismatch-between-the-eigenspace-and-test-individuals)
+	* [A. Computing identification rates for set B](#a-computing-identification-rates-for-set-b)
+	* [B. Computing the eigenspace B](#b-computing-the-eigenspace-b)
 
 ## Exercice 1 : Building the Eigenspace
 
@@ -79,7 +93,7 @@ All the code explained can be found in file [`exercice2.m`](public/Exercices/exe
 * [B. Approximating s1_6.jpg](#b-approximating-s1_6jpg)
 * [C. Computing the identification rates (first face)](#c-computing-the-identification-rates-first-face)
 * [D. More identification rates (mean faces)](#d-more-identification-rates-mean-faces)
-* [D. More identification rates (mean faces)](#d-more-identification-rates-mean-faces)
+* [E. Drawing indentification rates as a function of N](#e-drawing-indentification-rates-as-a-function-of-n)
 
 ### A. Projecting and plotting test_A
 
@@ -148,7 +162,7 @@ We get a better result with a fewer number of eigenfaces using the average rathe
 ![identification rate](image_rapport/ex2_pD.jpg)
 
 
-### E. Drawing indentification rates as a function of N-Best
+### E. Drawing indentification rates as a function of N
 
 We projected the images of TestA into SpaceA and we computed the N-Best identification rates, for various N, using the routine identify. We therefore wrote the following code:
 
@@ -165,6 +179,75 @@ y=[Nbest_rate(1),Nbest_max];
 
 plot(Nbest_rate);
 ```
+
 We obtain the following graph which is the identification rate as a function of N:
 
 ![identification rate](image_rapport/ex2_pE.jpg)
+
+The curve is an increasing function and reaches a maximum value for N=10 and stays stable from there. As the function `identify()` evaluates the pourcentage of identification it seems like for a value of N=10 the process of identification is optimal.
+
+## Exercice 3 : Verification
+
+All the code explained can be found in file [`exercice3.m`](public/Exercices/exercice3.m).
+
+* [A. Computing client and impostor scores](#a-computing-client-and-impostor-scores)
+* [B. Plotting the Receiver Operating Characteristic (ROC) curve](#b-plotting-the-receiver-operating-characteristic-ROC-curve)
+* [C. Drawing the Equal Error Rate (EER) curve](#c-drawing-the-equal-error-rate-EER-curve)
+
+### A. Computing client and impostor scores
+
+We use the `verify()` function with the following arguments:
+
+```matlab
+[DistancesClients, DistancesImpostors] = verify(model_projection,test_projection,5);
+```
+
+After plotting the histogram with rescaled values in order to be more readable we obtain the following graph:
+
+![identification rate](image_rapport/ex3_pA.jpg)
+
+we observe that the imposters scores are centered around a less important value than the clients. Therefore, they have a worse average score, even though some imposters can have a better score than some clients.
+
+### B. Plotting the Receiver Operating Characteristic (ROC) curve
+
+We use the `computeVerificationRates()` function with the following arguments:
+
+```matlab
+[FalseRejectionRates, FalseAcceptanceRates] = computeVerificationRates(DistancesClients,DistancesImpostors);
+```
+
+We obtain the ROC curve as so:
+
+![ROC curve](image_rapport/ex3_pB.jpg)
+
+This ROC curve is used when we have various threshold settings. If the acceptance threshold is low then we would allow a lot of people to gain access to the system and therefore the probability of rejecting someone that should be accepted (False Rejection) would be very low. On the contrary if the acceptance threshold is relativaly high, we would restrict as many people as we can and therefore the probability of accepting someone that should be rejected (False Acceptance) would be very low.
+
+### C. Drawing the Equal Error Rate (EER) curve
+
+We use the a simple loop to calculate the `EqualErrorRate` like so:
+
+```matlab
+EqualErrorRate = zeros(1,100)
+
+for i = 1:100
+    [DistancesClients, DistancesImpostors] = verify(model_projection,test_projection,i);
+    EqualErrorRate(i)=computeEER(DistancesClients, DistancesImpostors);
+end
+```
+
+We obtain the EER curve as so:
+
+![EER curve](image_rapport/ex3_pC.jpg)
+
+The Equal Error Rate is the rate at which both acceptance and rejection errors are equal. The more we use eigenfaces the less the ERR is high
+
+## Exercice 4 : Mismatch
+
+All the code explained can be found in file [`exercice4.m`](public/Exercices/exercice4.m).
+
+* [A. Computing identification rates for set B](#a-computing-identification-rates-for-set-b)
+* [B. Computing the eigenspace B](#b-computing-the-eigenspace-b)
+
+### A. Computing identification rates for set B
+
+### B. Computing the eigenspace B
