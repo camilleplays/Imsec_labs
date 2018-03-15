@@ -49,8 +49,7 @@ figureHandle3 = approximateImage('\\datas\teaching\courses\image\Tpbiometry\publ
 figureHandle4 = approximateImage('\\datas\teaching\courses\image\Tpbiometry\public\Images\train_A\s1_1.jpg',Means,SpaceA,100);
 ```
 
-![using 40 eigenfaces](image_rapport/ex1_pC40.jpg)
-![using 100 eigenfaces](image_rapport/ex1_pC100.jpg)
+![using 40 and 100 eigenfaces](image_rapport/ex1_pC.jpg)
 
 **Can we rebuild the first image perfectly ?** Yes we can, if we use all the eigenvalues (100), we have all the information needed to rebuild the image. We can do so because the image in question was used to build the eigenspace in the first place.
 
