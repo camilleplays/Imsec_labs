@@ -1,6 +1,8 @@
 # Face recognition using Eigenfaces
 
-Introduction 
+Report done by William CLOT and Camille PLAYS. 
+
+Last update: 18/03/18.
 
 * [**Exercice 1 : Building the Eigenspace**](#exercice-1--building-the-eigenspace)
 	* [A. Computing the Eigenspace A](#a-computing-the-eigenspace-a)
